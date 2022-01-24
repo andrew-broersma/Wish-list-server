@@ -4,13 +4,13 @@ let validateSession = require('../middleware')
 const { models } = require("../models")
 
 router.post('/addComment', async (req, res) => {
-    const { comment, gameId, listId } = req.body
+    const { comment, gameId } = req.body
     const { id } = req.user
     const createComment = {
         comment,
         gameId,
         userId: id,
-        listId
+        listId: id
     }
 
     const associate = {

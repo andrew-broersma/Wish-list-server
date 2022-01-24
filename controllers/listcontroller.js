@@ -5,13 +5,19 @@ const { Op } = require('sequelize');
 const router = require('express').Router()
 
 router.post('/updateList', async (req, res) => {
-    const { gameName, releaseDate, apiQuery, gameId, rating } = req.body
+    const { gameName, releaseDate, apiQuery, background, genres, metacritic, stores, rawgLink, screenshots, gameId, rating } = req.body
     const { id } = req.user
     const gameForList = {
         gameName,
         releaseDate,
         apiQuery,
         gameId,
+        background,
+        genres,
+        metacritic,
+        stores,
+        rawgLink,
+        screenshots,
         rating,
         userId: id,
         listId: id
@@ -36,9 +42,13 @@ router.get('/myList', async (req, res) => {
             },
             include: [
             {
-                model: models.CommentModel
-            }
-        ]}
+                model: models.CommentModel,
+                // where: {
+                //     gameId: models.CommentModel.gameId
+                // }
+            },
+        ]
+    }
         )
         res.status(200).json(userList)
     } catch (err) {
