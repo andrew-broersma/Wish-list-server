@@ -49,6 +49,10 @@ const List = db.define("list", {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
+    listId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    }
 })
 
 module.exports = List

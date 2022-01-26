@@ -44,7 +44,7 @@ router.get('/myList', async (req, res) => {
             {
                 model: models.CommentModel,
                 // where: {
-                //     gameId: models.CommentModel.gameId
+                //     gameId
                 // }
             },
         ]
@@ -57,19 +57,16 @@ router.get('/myList', async (req, res) => {
 });
 
 router.put('/updateRating', async (req, res) => {
-    const rating = req.body.rating;
-    const gameId = req.body.gameId
-    const {id} = req.user
+    const { rating, id } = req.body
 
     const query = {
         where: {
-            userId: id,
-            gameId: gameId
+            id
         }
     }
 
     const updateGame = {
-        rating: rating
+        rating
     }
 
     try {
@@ -81,13 +78,11 @@ router.put('/updateRating', async (req, res) => {
 });
 
 router.delete('/deleteGame', async (req, res) => {
-    const {id} = req.user
-    const gameId = req.body.gameId
+    const { id } = req.body
 
     const query = {
         where: {
-            gameId,
-            userId: id
+            id
         },
         include: [
             {
